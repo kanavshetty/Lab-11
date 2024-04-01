@@ -34,7 +34,7 @@ class HashTable{
         status[hashValue] = 1;
     }
 
-    T find(T key){
+    T* getItem(T key){
         int index = Hash(key);
         while(table[index] != key && table[index] != NULL && status != 0){
             index++;
@@ -42,19 +42,19 @@ class HashTable{
         if (table[index] == NULL){
             //throw not found?
         }
-        return table[index];
+        return &table[index];
     }
 
-    T remove(T key){
+    T* remove(T key){
         int hashValue = Hash(key);
-        T temp;
+        T* temp;
         while(table[hashValue] != key && table[hashValue] != NULL && status != 0){
             hashValue++;
         }
         if (table[hashValue] == NULL){
             //throw not found?
         }
-        temp = table[hashValue];
+        temp = new T(table[hashValue]);
         table[hashValue] = NULL;
         status[hashValue] = -1;
         return temp;
